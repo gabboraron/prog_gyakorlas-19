@@ -13,6 +13,7 @@ enor::enor(const string& fname)
 
 void enor::first()
 {
+    cout<<endl<<"Az alabbiak nem vettek 'arukod22'-t: "<<endl;
     next();
 }
 
@@ -34,6 +35,11 @@ void enor::read()
     istringstream ss(tmp);
     sx = x.fail()? abnorm : norm;
 
+    /* linker valtozok */
+    bool voltMar;
+    int j;
+    /* *** */
+
     if(sx==norm){
         ss>>vasarlas.time;
         ss>>vasarlas.id;
@@ -42,8 +48,30 @@ void enor::read()
             vasarlas.items.push_back(tmp2);
             if(tmp2 == "arukod22")
                 voltarukod22 = true;
-            c=c+1;
         }
+
+            /* linker, hogy volt-e mar ilyen elem */
+           voltMar = false;
+           for(int i=1;i<vasarlas.items.size(); ++i)
+           {
+
+                j = 0;
+
+                while((voltMar == false) && (j<i))
+                {
+                    if(vasarlas.items[i] == vasarlas.items[j])
+                        voltMar = true;
+                    j = j+1;
+                }
+
+                if(voltMar == false)
+                {
+                    c = c + 1;
+                }
+           }
+            /* *** */
+            //c=c+1;
+
         if(voltarukod22 == false)
             cout<<endl<<vasarlas.time<<"    "<<vasarlas.id;
         if(elsovasarlo)
@@ -64,50 +92,9 @@ void enor::read()
     }
 }
 
-/*
-void enor::osszegez()
-{
-    //k�t �sszegz�s
-    dx.sum=0;
-    dx.jo=true;
-    for(int i=0; i<(int)dx.v.size(); ++i)
-    {
-        int ar;
-        if(dx.v[i].tipus=='G') ar=500;
-        else if(dx.v[i].tipus=='D') ar=800;
-        else ar=1000;
-        dx.sum+=ar;
-        dx.jo=dx.jo && dx.v[i].tipus=='D';
-    }
-
-}
-
-vetites enor::current() const
-{
-    return dx;
-}
-*/
-
 bool enor::end() const
 {
     if(sx==abnorm)
         cout<<endl<<endl<<"A legkevesebbet ("<<minOfItems<<" darabot) "<<minvasarlo.id<<" vasarolta "<< minvasarlo.time<<"-kor";
     return sx==abnorm;
 }
-
-/*
-std::ostream& operator<<(std::ostream& out, const vetites& z)
-{
-    for(int i=0; i<(int)z.id.size(); ++i)
-    {
-        out<<z.id[i]<<" ";
-    }
-    out<<z.ido<<" ";
-    for(int i=0; i<(int)z.v.size(); ++i)
-    {
-        out<<z.v[i].hely<<" "<<z.v[i].tipus<<" ";
-    }
-    out<<"sum="<<z.sum<<" "<<z.jo<<endl;
-    return out;
-}
-*/
