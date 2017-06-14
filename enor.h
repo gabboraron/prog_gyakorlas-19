@@ -21,10 +21,11 @@ class enor{
         void first();
         void next();
         //vetites current() const;
+        vasarlo Current() const { return dx; }
         bool end() const;
     private:
         std::ifstream x;
-        //vetites dx;
+        vasarlo dx;
         status sx;
         void read();
 

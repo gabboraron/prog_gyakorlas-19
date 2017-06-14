@@ -1,4 +1,4 @@
 123 A1 arukod2 arukod1 arukod3
 223 B1 arukod22 arukod23
 323 C1 arukod22
-223 B2 arukod25 arukod23
+423 B2 arukod25 arukod23
